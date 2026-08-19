@@ -640,8 +640,8 @@
       <div class="fd">Rewrite each page into a citation view where every element has a stable <span class="mono">H1…Hn</span> handle.</div>
       <span class="who">S1</span></div>
     <div class="fnode g1"><div class="fi"><svg class="icn"><use href="#chip"/></svg></div>
-      <div class="fn">BOX 3</div><div class="ft">Stand up the SLM</div>
-      <div class="fd">Deploy the 7B model locally, pin the checkpoint, measure plain classification accuracy.</div>
+      <div class="fn">BOX 3</div><div class="ft">Configure the SLM</div>
+      <div class="fd">Already deployed — point at the endpoint, verify and pin the served checkpoint, measure plain classification accuracy.</div>
       <span class="who">S2</span></div>
   </div>
 
@@ -1165,12 +1165,15 @@ fact that is not visible above.</pre>
 
     <div class="who-c s2"><div class="who-hd"><div class="who-av"><svg class="icn"><use href="#chip"/></svg></div>
       <div><div class="who-r">STUDENT 2</div><div class="who-t">SLM &amp; XML Pipeline</div></div></div>
-      <div class="who-b"><p class="lead">Build the experimental infrastructure: deploy the 7B model
-      locally, freeze model/checkpoint/tokenizer, implement V1/V2/V3 prompts, design the XML schema and
-      parser, handle malformed output, record raw outputs unmodified, run baseline classification,
-      calculate XML compliance, capture logprobs where technically reliable, log runtime and resources.</p>
+      <div class="who-b"><p class="lead">The model is <b>already deployed</b> behind an OpenAI-compatible
+      endpoint, so this role starts at configuration, not deployment: point the client at it, verify and
+      pin the served checkpoint, fix and record the generation settings, and smoke it. Then implement
+      V1/V2/V3 prompts, design the XML schema and parser, handle malformed output, record raw outputs
+      unmodified, run baseline classification, calculate XML compliance, capture logprobs where
+      technically reliable, log runtime and cost. Because we do not own the deployment, record the served
+      model ID with every run — a silent checkpoint swap invalidates every paired C1–C4 comparison.</p>
       <div class="own"><svg class="icn"><use href="#target"/></svg>Owns Boxes 3–4</div>
-      <div class="deliv"><span class="d">model_server/</span><span class="d">prompts/</span><span class="d">xml_schema/</span><span class="d">inference_runner.py</span><span class="d">baseline_predictions.csv</span><span class="d">raw_outputs/</span></div></div></div>
+      <div class="deliv"><span class="d">model_config.md</span><span class="d">prompts/</span><span class="d">xml_schema/</span><span class="d">inference_runner.py</span><span class="d">baseline_predictions.csv</span><span class="d">raw_outputs/</span></div></div></div>
 
     <div class="who-c s3"><div class="who-hd"><div class="who-av"><svg class="icn"><use href="#anchor"/></svg></div>
       <div><div class="who-r">STUDENT 3</div><div class="who-t">Citation Grounding</div></div></div>
@@ -1224,7 +1227,7 @@ fact that is not visible above.</pre>
   <div class="tl">
     <div class="wk"><div class="wk-t"><b>W1</b><span>build</span></div>
       <div class="wk-b"><h4>Dataset &amp; infrastructure</h4>
-      <p>All five in parallel — S1 dataset audit and preprocessing · S2 model deployment · S3 citation
+      <p>All five in parallel — S1 dataset audit and preprocessing · S2 endpoint configuration · S3 citation
       schema design · S4 intervention design · S5 literature and statistics plan.</p>
       <div class="ms"><b>Milestone</b>20 webpages pass <span class="mono">raw HTML → processed input → model → valid XML</span></div></div></div>
 

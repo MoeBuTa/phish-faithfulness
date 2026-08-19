@@ -32,19 +32,28 @@ Deliverables: `data_manifest.csv` · `preprocessing.py` · `citation_view.py` ·
 
 ## Student 2 — SLM and XML pipeline
 
-Deploy the 7B model locally, freeze model/checkpoint/tokenizer, implement the
-V1/V2/V3 prompts, design the XML schema and parser, handle malformed output,
-record raw outputs unmodified, run baseline classification, calculate XML
-compliance, capture logprobs where technically reliable, log runtime and
-resources.
+The model is already deployed and served behind an OpenAI-compatible endpoint,
+so this role starts at **configuration, not deployment**: point the client at the
+endpoint, verify and pin which checkpoint it is actually serving, fix and record
+the generation settings (temperature, max tokens, seed / determinism), and smoke
+it. Then implement the V1/V2/V3 prompts, design the XML schema and parser, handle
+malformed output, record raw outputs unmodified, run baseline classification,
+calculate XML compliance, capture logprobs where technically reliable, and log
+runtime and cost.
+
+One risk that comes *with* not owning the deployment: we do not control when the
+endpoint changes. Record the served model ID with every run and re-check it
+before each experiment. A silent checkpoint swap mid-project invalidates every
+paired comparison in C1–C4, and it will not announce itself.
 
 Starting points: `phishfaith/prompts.py`, `phishfaith/parse.py`.
 
 Note for Week 1: `WhiteRabbitNeo/WhiteRabbitNeo-V3-7B` now 301-redirects to
 `DeepHat/DeepHat-V1-7B` (base model `Qwen/Qwen2.5-Coder-7B`, Apache-2.0). Cite
-the new ID and note the former name.
+the new ID and note the former name — and confirm which of the two the endpoint
+reports, rather than assuming.
 
-Deliverables: `model_server/` · `prompts/` · `xml_schema/` ·
+Deliverables: `model_config.md` · `prompts/` · `xml_schema/` ·
 `inference_runner.py` · `baseline_predictions.csv` · `raw_outputs/`
 
 ## Student 3 — citation grounding
@@ -101,7 +110,7 @@ not yet a result.
 
 | week | focus | what happens |
 |---|---|---|
-| **W1** | build | All five in parallel: S1 dataset audit and preprocessing · S2 model deployment · S3 citation schema · S4 intervention design · S5 literature and statistics plan. **Milestone: 20 pages pass raw HTML → citation view → model → valid XML.** |
+| **W1** | build | All five in parallel: S1 dataset audit and preprocessing · S2 endpoint configuration and validation · S3 citation schema · S4 intervention design · S5 literature and statistics plan. **Milestone: 20 pages pass raw HTML → citation view → model → valid XML.** |
 | **W2** | pilot | 100–150 development pages. Validate classification, XML compliance, citation exact-match, context length, preprocessing, inference stability. **The real go/no-go: can the model reliably produce machine-locatable evidence?** |
 | **W3** | baseline | Freeze Dataset B. 300 phishing + 300 benign for the RQ1 results. Pilot the V1/V2/V3 ladder. |
 | **W4** | citations | Full XML prompt. Evaluate grounding, semantic support, unsupported claims, reasoning↔verdict consistency. Freeze the eligible set. |
