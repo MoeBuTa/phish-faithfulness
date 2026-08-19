@@ -151,6 +151,43 @@ Pipeline: take the original page → run the model on C1 → read the cited sour
 IDs → build C2 → pick a matched uncited element → build C3 → build C4
 independently. Implemented in `scripts/build_variants.py`.
 
+### What the raw HTML actually is
+
+PhreshPhish ships one row per page: `sha256, url, label, target, date, lang,
+lang_score, html`. The `html` field is the **raw source of the document as
+fetched** — full `<!DOCTYPE html>`, scripts and inline CSS inline, external URLs
+left pointing outward. No screenshots, no stylesheets, no assets, nothing
+localised. `target` (the impersonated brand) is populated on phishing rows only.
+
+Measured on `test-000.parquet` (n=1,000, 547 benign / 453 phish), because these
+facts change how the data must be sampled:
+
+- **The classes differ in size by an order of magnitude.** Benign median 271,004
+  characters; phishing median 29,089. Max in the shard is 10.6 M characters. So
+  length alone is a strong class signal in this corpus, and any cross-class claim
+  needs it controlled. (This is the opposite of what the Zenodo corpus does, where
+  phishing pages are the long ones — do not carry intuitions between the two.)
+- **Every size and language filter is therefore a sampling decision.** On this
+  shard, English-only moves the phishing share 45.3% → 38.3%; `lang_score ≥ 0.80`
+  moves it 38.3% → 29.5% (short pages get lower language confidence); a 400k
+  character cap moves it back 29.5% → 37.8% by deleting benign pages
+  preferentially. `preprocess.py` prints every step that shifts the balance by
+  more than two points and warns. **Do not let a cleaning threshold set the class
+  balance of the RQ1 baseline set** — sample that with explicit length matching.
+- **The brand label is weaker than it looks.** Only 53.4% of phishing rows in this
+  shard contain their own `target` string anywhere in the HTML, so E3 is not
+  textually present for roughly half of them. And 53 of the 57 rows labelled
+  `target=google` are `*.blogspot.*` pages — Google-owned hosting, not Google
+  impersonation. 124 of 453 phishing rows (27%) sit on free hosting
+  (blogspot / wordpress / weebly / wixsite / github.io), where the domain
+  genuinely belongs to the platform. **E1 does not apply to those pages**, and any
+  E1-based eligibility rule must exclude them rather than score them as mismatches.
+
+None of this breaks the C1–C4 design, because those arms are within-page paired —
+a page is compared against its own edited version, so class-level differences
+cancel. It does bear on the RQ1 baseline, on any cross-class statement, and on how
+the eligible set is drawn.
+
 ### The label-preservation trap
 
 We must **not** describe the generated variants as new phishing ground truth.

@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import re
-from collections import Counter
 from pathlib import Path
 
 import pandas as pd
@@ -41,35 +40,59 @@ def near_dup_key(html: str) -> str:
     return digest.hexdigest()
 
 
+def _tally(df: pd.DataFrame) -> tuple[int, int, int, float]:
+    vc = df["label"].value_counts()
+    b, p = int(vc.get("benign", 0)), int(vc.get("phish", 0))
+    return len(df), b, p, (p / (b + p) if b + p else 0.0)
+
+
 def build_manifest(shards: list[Path], out: Path) -> pd.DataFrame:
     frames = [pd.read_parquet(p, columns=COLUMNS) for p in shards]
     df = pd.concat(frames, ignore_index=True)
-    counts = Counter({"loaded": len(df)})
+    steps = [("loaded", _tally(df))]
 
     df = df[df["lang"] == "en"]
-    counts["after_english"] = len(df)
+    steps.append(("english", _tally(df)))
 
     df = df[df["lang_score"] >= MIN_LANG_SCORE]
-    counts["after_lang_score"] = len(df)
+    steps.append(("lang_score", _tally(df)))
 
     size = df["html"].str.len()
     df = df[(size >= MIN_HTML_CHARS) & (size <= MAX_HTML_CHARS)]
-    counts["after_size"] = len(df)
+    steps.append(("size", _tally(df)))
 
     df = df.drop_duplicates(subset="sha256")
-    counts["after_exact_dedup"] = len(df)
+    steps.append(("exact_dedup", _tally(df)))
 
     df = df.assign(dup_key=df["html"].map(near_dup_key)).drop_duplicates(subset="dup_key")
-    counts["after_near_dedup"] = len(df)
+    steps.append(("near_dedup", _tally(df)))
 
     out.parent.mkdir(parents=True, exist_ok=True)
     df.drop(columns=["html"]).to_csv(out, index=False)
     df.to_parquet(out.with_suffix(".parquet"), index=False)
 
-    print("filter                 rows")
-    for k, v in counts.items():
-        print(f"{k:<22} {v:>7}")
-    print("\nlabel balance:", df["label"].value_counts().to_dict())
+    print(f"{'filter':<14}{'rows':>8}{'benign':>8}{'phish':>8}{'phish %':>9}")
+    for name, (n, b, p, share) in steps:
+        print(f"{name:<14}{n:>8}{b:>8}{p:>8}{share:>8.1%}")
+
+    # The two classes differ in size by roughly an order of magnitude (benign median
+    # ~271k chars, phish ~29k in test-000), and phishing pages are short enough that
+    # language detection is less confident on them. So several of these filters cut
+    # one class harder than the other and quietly rewrite the class balance. Every
+    # such step is reported -- a filter that moves the balance is a sampling decision,
+    # not a cleaning step, and it must not be made by accident.
+    skewed = [
+        (name, prev[3], cur[3])
+        for (_, prev), (name, cur) in zip(steps, steps[1:])
+        if abs(cur[3] - prev[3]) > 0.02
+    ]
+    if skewed:
+        print("\nWARNING: these filters moved the class balance:")
+        for name, before, after in skewed:
+            print(f"         {name:<12} {before:>6.1%} -> {after:>6.1%}  ({after - before:+.1%})")
+        print("         Do not let them set the balance of the RQ1 baseline set -- sample that\n"
+              "         with explicit length matching. See docs/SPEC.md, 'What the raw HTML is'.")
+
     print(f"\nwrote {out} and {out.with_suffix('.parquet')}")
     return df
 
