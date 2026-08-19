@@ -105,14 +105,16 @@
   /* ── the workflow: one page -> four runs -> one comparison ── */
   .flow{display:flex;flex-direction:column;flex:1;min-height:0}
 
-  .frow{display:flex;align-items:center;gap:.3em}
-  .fchip{border:2px solid var(--ink);border-radius:.4em;padding:.32em .42em;background:#fff;
-    display:flex;align-items:center;gap:.3em;font-size:.72em;font-weight:800;line-height:1.15;flex:none}
+  .frow{display:grid;grid-template-columns:1fr auto auto auto 1fr;gap:.3em;align-items:stretch}
+  .fchip{border:2px solid var(--ink);border-radius:.4em;padding:.3em .42em;background:#fff;
+    display:flex;align-items:center;justify-content:center;gap:.3em;font-size:.72em;
+    font-weight:800;line-height:1.15;text-align:center;min-width:0}
   .fchip svg{width:1.05em;height:1.05em;flex:none}
-  .fchip.said{flex:1;min-width:0;background:var(--claim-bg);border-color:var(--claim);
-    color:var(--claim);font-family:var(--mono);font-size:.68em;display:block;padding:.3em .45em}
-  .fchip.said em{font-style:normal;font-weight:800;display:block;font-size:.92em;opacity:.85}
-  .farr{color:var(--faint);font-weight:800;font-size:.85em;flex:none}
+  .fchip.said{flex-direction:column;gap:.05em;background:var(--claim-bg);border-color:var(--claim);
+    color:var(--claim);font-family:var(--mono);font-size:.68em}
+  .fchip.said b{font-weight:800}
+  .fchip.said em{font-style:normal;font-weight:800;font-size:.92em;opacity:.82}
+  .farr{color:var(--faint);font-weight:800;font-size:.85em;display:flex;align-items:center}
 
   .fan{width:100%;height:1.35em;display:block;flex:none}
   .fan path{fill:none;stroke:var(--line-2);stroke-width:2.2;stroke-linecap:round}
@@ -225,11 +227,11 @@
 
         <div class="flow">
           <div class="frow">
-            <div class="fchip"><svg class="icn"><use href="#doc"/></svg>page</div>
+            <div class="fchip"><svg class="icn"><use href="#doc"/></svg>page + instruction</div>
             <div class="farr">&rarr;</div>
-            <div class="fchip"><svg class="icn"><use href="#chip"/></svg>7B SLM</div>
+            <div class="fchip"><svg class="icn"><use href="#chip"/></svg>LLM</div>
             <div class="farr">&rarr;</div>
-            <div class="fchip said">&ldquo;phishing&rdquo;<em>because E1 + E2</em></div>
+            <div class="fchip said"><b>&ldquo;phishing&rdquo;</b><em>because E1 + E2</em></div>
           </div>
 
           <svg class="fan" viewBox="0 0 400 26" preserveAspectRatio="none" aria-hidden="true">
