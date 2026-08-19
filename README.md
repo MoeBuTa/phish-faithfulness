@@ -119,8 +119,16 @@ and must never be described as such. See [SPEC.md §6](docs/SPEC.md).
 ## Corpus
 
 [PhreshPhish](https://huggingface.co/datasets/phreshphish/phreshphish) —
-CC-BY-4.0, ungated. 498,255 train + 168,060 test pages; `sha256, url, label,
-target, date, lang, lang_score, html`.
+CC-BY-4.0, ungated. 666,315 pages, **298,402 of them phishing**: 498,255 train
+(276,729 benign / 221,526 phish) + 168,060 test (91,260 benign / 76,876 phish).
+Fields `sha256, url, label, target, date, lang, lang_score, html`, with `target`
+on phishing rows only.
+
+We use nowhere near all of it. English-only, size bounds and dedup cut it first;
+then a page enters the experiment only if the model's citations are all
+`GROUNDED`. [SPEC.md §7](docs/SPEC.md) fixes the working set at **n = 300
+eligible pages**, which is 1,200 runs across C1–C4 plus the no-op repeats for
+the noise floor.
 
 Zenodo 8041387 was rejected as the main corpus: it is separable at 0.960 by page
 text alone, 0.880 after brand control, and **0.838 from English function words

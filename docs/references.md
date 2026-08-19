@@ -8,7 +8,15 @@ cannot be redistributed.
 
 **PhreshPhish** — the project's main corpus · CC-BY-4.0
 Dalton, Gowda, Rao, Pargi, Hadj Khodabakhshi, Rombs, Jou & Marwah · arXiv preprint (no venue)
-666,315 pages: 498,255 train / 168,060 test. Fields: `sha256, url, label, target, date, lang, lang_score, html`. ~36.6 GB download, ~193 GB expanded. Ships base-rate benchmark subsets.
+666,315 pages, of which **298,402 are phishing**:
+| split | total | benign | phish |
+|---|---|---|---|
+| train | 498,255 | 276,729 | 221,526 |
+| test | 168,060 | 91,260 | 76,876 |
+
+Fields: `sha256, url, label, target, date, lang, lang_score, html`; `target` (brand) is populated on phishing rows only. ~36.6 GB download, ~193 GB expanded. Ships 975 base-rate benchmark subsets. Counts are from the dataset card at v1.0.1 (2026-02-07), which added ~200k samples over v1.0.0 — **pin the revision**, because these numbers move.
+
+Do not read class counts off `datasets-server.huggingface.co/statistics`: it returns `partial: true` and samples ~20k rows, so its label frequencies are not corpus totals.
 <https://huggingface.co/datasets/phreshphish/phreshphish> · <https://arxiv.org/abs/2507.10854>
 
 **Phishing Website Dataset (Zenodo)** — fallback for any visual arm · CC-BY-4.0
