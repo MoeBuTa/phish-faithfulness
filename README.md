@@ -1,4 +1,4 @@
-# Evidence or Rationalisation
+# Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection
 
 **SLMs cite evidence. We test whether they use it.**
 

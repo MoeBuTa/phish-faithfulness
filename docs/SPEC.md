@@ -1,7 +1,8 @@
 # Project specification
 
-**Evidence or Rationalisation** — evaluating evidence grounding and
-faithfulness in small language models for phishing webpage detection.
+**Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection**
+
+*SLMs cite evidence. We test whether they use it.*
 
 Honours / capstone project · 8 weeks · 5 students.
 This file is the authority. Where the slide, the proposal page and this document
@@ -294,12 +295,9 @@ any arm that needs screenshots.
 
 ## 11. Working title
 
-- **Preferred** — Evaluating Evidence Grounding and Faithfulness in Small
+- **In use** — Evaluating Evidence Grounding and Faithfulness in Small
   Language Models for Phishing Webpage Detection
 - **Alternative** — Evidence or Rationalisation: Evaluating Security Reasoning
   in Small Language Models for Phishing Detection
-- **Short name**, used across the repo and the slide — Evidence or
-  Rationalisation
-
-No interrogative titles. The one-line version for a slide or a talk is
+That title is what the slide, the proposal page and the repo all carry. No interrogative titles. The one-line version for a slide or a talk is
 declarative: *SLMs cite evidence. We test whether they use it.*
