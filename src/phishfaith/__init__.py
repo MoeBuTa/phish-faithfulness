@@ -1,4 +1,4 @@
-"""Starter code for the SLM phishing-evidence faithfulness project.
+"""Starter code for the LLM phishing-evidence faithfulness project.
 
 Pipeline order (see docs/SPEC.md):
 

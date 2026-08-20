@@ -1,8 +1,8 @@
 # Project specification
 
-**Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection**
+**Evaluating Evidence Grounding and Faithfulness in Large Language Models for Phishing Webpage Detection**
 
-*SLMs cite evidence. We test whether they use it.*
+*LLMs cite evidence. We test whether they use it.*
 
 Honours / capstone project · 8 weeks · 5 students.
 This file is the authority. Where the slide, the proposal page and this document
@@ -282,7 +282,7 @@ any arm that needs screenshots.
 ## 10. Deliverables
 
 1. Systematic evaluation of evidence-grounded phishing reasoning in a
-   security-oriented 7B SLM.
+   security-oriented 7B LLM.
 2. A structured XML citation protocol linking decisions to exact URL and HTML
    evidence.
 3. An empirical separation of classification correctness from evidence
@@ -298,6 +298,6 @@ any arm that needs screenshots.
 - **In use** — Evaluating Evidence Grounding and Faithfulness in Small
   Language Models for Phishing Webpage Detection
 - **Alternative** — Evidence or Rationalisation: Evaluating Security Reasoning
-  in Small Language Models for Phishing Detection
+  in Large Language Models for Phishing Detection
 That title is what the slide, the proposal page and the repo all carry. No interrogative titles. The one-line version for a slide or a talk is
-declarative: *SLMs cite evidence. We test whether they use it.*
+declarative: *LLMs cite evidence. We test whether they use it.*

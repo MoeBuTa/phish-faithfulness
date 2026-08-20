@@ -1,4 +1,4 @@
-<title>Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection</title>
+<title>Evaluating Evidence Grounding and Faithfulness in Large Language Models for Phishing Webpage Detection</title>
 <style>
   /* Deliberately single-theme: a comic-paper look depends on the light ground,
      so the palette commits to it rather than inverting badly in dark mode. */
@@ -534,8 +534,8 @@
 <!-- ══════════ HERO ══════════ -->
 <header>
   <div class="kicker"><svg class="icn"><use href="#q"/></svg>Honours / Capstone Project · 8 weeks · 5 students</div>
-  <h1>Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection</h1>
-  <p class="tagline">SLMs cite evidence. We test whether they use it.</p>
+  <h1>Evaluating Evidence Grounding and Faithfulness in Large Language Models for Phishing Webpage Detection</h1>
+  <p class="tagline">LLMs cite evidence. We test whether they use it.</p>
   <p class="lede">A 7B security model can label a webpage <em>phishing</em> and quote the exact HTML
   that proves it. This project takes the harder step — we <b>change that quoted evidence</b> and see
   whether the decision changes with it. If it does not, the citation was a story told afterwards.</p>
@@ -621,7 +621,7 @@
   </div>
 
   <div class="callout tilt-r"><svg class="icn"><use href="#target"/></svg>
-  <div><b>So what does the project actually do?</b> We give this page to a small language model, make
+  <div><b>So what does the project actually do?</b> We give this page to a large language model, make
   it name which of E1/E2/E3 it used and quote them exactly — then we <b>edit those exact things</b>
   and see whether its decision really depended on them.</div></div>
 </section>
@@ -643,7 +643,7 @@
       <div class="fd">Rewrite each page into a citation view where every element has a stable <span class="mono">H1…Hn</span> handle.</div>
       <span class="who">S1</span></div>
     <div class="fnode g1"><div class="fi"><svg class="icn"><use href="#chip"/></svg></div>
-      <div class="fn">BOX 3</div><div class="ft">Configure the SLM</div>
+      <div class="fn">BOX 3</div><div class="ft">Configure the LLM</div>
       <div class="fd">Already deployed — point at the endpoint, verify and pin the served checkpoint, measure plain classification accuracy.</div>
       <span class="who">S2</span></div>
   </div>
@@ -1119,7 +1119,7 @@ fact that is not visible above.</pre>
 
   <div class="callout tilt-r" style="background:var(--lime-bg)"><svg class="icn" style="color:var(--lime)"><use href="#bulb"/></svg>
   <div>Handled carefully, this becomes a <b>contribution rather than a caveat</b>: a reproducible
-  intervention benchmark derived from PhreshPhish for evaluating evidence-grounded SLM phishing
+  intervention benchmark derived from PhreshPhish for evaluating evidence-grounded LLM phishing
   reasoning. That is a deliverable in its own right — and it is the shared core of
   <b>Student 3 and Student 4's</b> work.</div></div>
 </section>
@@ -1138,8 +1138,8 @@ fact that is not visible above.</pre>
     <div class="ext"><span class="tag">Ext C</span><h3>Explanation burden</h3>
       <p>Does asking for more reasoning make the model <em>worse</em> at security?</p>
       <div class="mini">V1 verdict only<br>V2 + citations<br>V3 + citations + explanation<br><br>compare accuracy across all three</div></div>
-    <div class="ext"><span class="tag">Ext D</span><h3>Cross-SLM comparison</h3>
-      <p>Add one or two more 7B/8B models — not to build a leaderboard, but to ask whether grounding failures are <b>specific to this model or common to SLMs</b>.</p></div>
+    <div class="ext"><span class="tag">Ext D</span><h3>Cross-LLM comparison</h3>
+      <p>Add one or two more 7B/8B models — not to build a leaderboard, but to ask whether grounding failures are <b>specific to this model or common to LLMs</b>.</p></div>
     <div class="ext"><span class="tag">Ext E</span><h3>Right answer, wrong evidence</h3>
       <p>Analyse pages where the verdict is correct but the evidence is unsupported — quantifying how far conventional accuracy <b>overestimates</b> trustworthy reasoning.</p></div>
   </div>
@@ -1174,7 +1174,7 @@ fact that is not visible above.</pre>
       <div class="deliv"><span class="d">data_manifest.csv</span><span class="d">preprocessing.py</span><span class="d">citation_view.py</span><span class="d">dedup_report.md</span><span class="d">dataset_report.md</span></div></div></div>
 
     <div class="who-c s2"><div class="who-hd"><div class="who-av"><svg class="icn"><use href="#chip"/></svg></div>
-      <div><div class="who-r">STUDENT 2</div><div class="who-t">SLM &amp; XML Pipeline</div></div></div>
+      <div><div class="who-r">STUDENT 2</div><div class="who-t">LLM &amp; XML Pipeline</div></div></div>
       <div class="who-b"><p class="lead">The model is <b>already deployed</b> behind an OpenAI-compatible
       endpoint, so this role starts at configuration, not deployment: point the client at it, verify and
       pin the served checkpoint, fix and record the generation settings, and smoke it. Then implement
@@ -1270,7 +1270,7 @@ fact that is not visible above.</pre>
     <div class="wk"><div class="wk-t"><b>W7</b><span>extend</span></div>
       <div class="wk-b"><h4>Extensions &amp; human annotation</h4>
       <p>Complete human annotation, inter-annotator agreement, and the correct-answer/wrong-evidence
-      analysis. If time permits: evidence competition, necessity/sufficiency, a second SLM.</p></div></div>
+      analysis. If time permits: evidence competition, necessity/sufficiency, a second LLM.</p></div></div>
 
     <div class="wk"><div class="wk-t"><b>W8</b><span>write</span></div>
       <div class="wk-b"><h4>Analysis &amp; writing</h4>
@@ -1315,13 +1315,13 @@ fact that is not visible above.</pre>
 <section>
   <div class="sec-head"><span class="tab">§32</span><h2>What we expect to deliver</h2></div>
   <div class="grid g-con">
-    <div class="con"><span class="cn">1</span><p>A systematic evaluation of <b>evidence-grounded phishing reasoning</b> in a security-oriented 7B SLM.</p></div>
+    <div class="con"><span class="cn">1</span><p>A systematic evaluation of <b>evidence-grounded phishing reasoning</b> in a security-oriented 7B LLM.</p></div>
     <div class="con"><span class="cn">2</span><p>A structured <b>XML citation protocol</b> linking phishing decisions to exact URL and HTML evidence.</p></div>
     <div class="con"><span class="cn">3</span><p>An empirical analysis distinguishing <b>classification correctness from evidence correctness</b>.</p></div>
     <div class="con"><span class="cn">4</span><p>A controlled <b>cited-evidence intervention</b> testing whether decisions actually depend on the evidence the model claims to use.</p></div>
     <div class="con"><span class="cn">5</span><p>A <b>matched uncited-evidence control</b> separating citation-specific effects from generic sensitivity to HTML modification.</p></div>
-    <div class="con"><span class="cn">6</span><p>A <b>placebo injection</b> experiment measuring whether SLMs rationalise decisions using causally irrelevant cues.</p></div>
-    <div class="con"><span class="cn">7</span><p>A <b>reproducible pipeline</b> for future research on trustworthy SLM cybersecurity reasoning.</p></div>
+    <div class="con"><span class="cn">6</span><p>A <b>placebo injection</b> experiment measuring whether LLMs rationalise decisions using causally irrelevant cues.</p></div>
+    <div class="con"><span class="cn">7</span><p>A <b>reproducible pipeline</b> for future research on trustworthy LLM cybersecurity reasoning.</p></div>
   </div>
 </section>
 
@@ -1430,7 +1430,7 @@ fact that is not visible above.</pre>
     <div class="ref"><div class="rt"><span class="badge paper">SLM baseline</span><span class="badge repo">Repo</span><span class="lic none">NO LICENCE</span></div>
       <h4>Small Language Models for Phishing Website Detection</h4>
       <p class="meta">Goldenits, König, Raubitzek &amp; Ekelhart · J. Cybersecurity and Privacy 6(2):48, 2026</p>
-      <p class="note">The nearest SLM benchmark: cost, performance and privacy trade-offs on HTML-only pages. It checks label-vs-score coherence but <b>does no intervention</b>. Note the repo ships <b>no data and no model generations</b> — you cannot reuse their outputs.</p>
+      <p class="note">The nearest small-model benchmark: cost, performance and privacy trade-offs on HTML-only pages. It checks label-vs-score coherence but <b>does no intervention</b>. Note the repo ships <b>no data and no model generations</b> — you cannot reuse their outputs.</p>
       <a href="https://arxiv.org/abs/2511.15434">arxiv.org/abs/2511.15434</a>
       <a href="https://www.mdpi.com/2624-800X/6/2/48">mdpi.com/2624-800X/6/2/48</a>
       <a href="https://github.com/sbaresearch/benchmarking-SLMs">github.com/sbaresearch/benchmarking-SLMs</a></div>
@@ -1442,9 +1442,9 @@ fact that is not visible above.</pre>
   <div class="sec-head"><span class="tab">§33</span><h2>Working title</h2></div>
   <div class="titles">
     <div class="trow pref"><span class="k">In use</span>
-      <span class="tt">Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection</span></div>
+      <span class="tt">Evaluating Evidence Grounding and Faithfulness in Large Language Models for Phishing Webpage Detection</span></div>
     <div class="trow"><span class="k">Alternative</span>
-      <span class="tt">Evidence or Rationalisation: Evaluating Security Reasoning in Small Language Models for Phishing Detection</span></div>
+      <span class="tt">Evidence or Rationalisation: Evaluating Security Reasoning in Large Language Models for Phishing Detection</span></div>
   </div>
 </section>
 

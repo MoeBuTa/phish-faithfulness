@@ -1,6 +1,6 @@
-# Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection
+# Evaluating Evidence Grounding and Faithfulness in Large Language Models for Phishing Webpage Detection
 
-**SLMs cite evidence. We test whether they use it.**
+**LLMs cite evidence. We test whether they use it.**
 
 A 7B security model can label a webpage *phishing* and quote the exact HTML that
 proves it. This project takes the harder step: **we change that quoted evidence

@@ -77,32 +77,45 @@
 
   .mock{font-size:.5em;color:var(--faint);font-weight:700;text-align:center;
     letter-spacing:.06em;text-transform:uppercase;margin-top:.28em}
-  .ev{display:flex;flex-direction:column;gap:.28em;margin-top:.35em}
-  .evr{display:flex;gap:.38em;align-items:center;border:2px solid;border-radius:.4em;
-    padding:.3em .4em;background:#fff;flex:1}
-  .evr.e1,.evr.e2{border-color:var(--alert);background:#FEF6F5}
-  .evr.e3{border-color:var(--claim);background:#FEF8F1}
-  .evr .tagn{font-family:var(--mono);font-weight:800;font-size:.66em;flex:none;
-    border:1.5px solid currentColor;border-radius:.25em;padding:0 .28em;line-height:1.45}
-  .evr.e1 .tagn,.evr.e2 .tagn{color:var(--alert)} .evr.e3 .tagn{color:var(--claim)}
-  .evr .evt{font-size:.68em;line-height:1.22;min-width:0}
-  .evr .evt b{font-weight:800}
-  .evr .evt span{color:var(--soft);display:block}
 
-  /* ══════ ② method ══════ */
-  .motiv{display:flex;flex-direction:column;gap:.3em;margin-bottom:.5em}
-  .mrow{display:flex;gap:.4em;align-items:center;border:2px solid;border-radius:.42em;
-    padding:.34em .45em}
-  .mrow.can{border-color:var(--ok);background:var(--ok-bg)}
-  .mrow.unk{border-color:var(--claim);background:var(--claim-bg)}
-  .mrow .mi{width:1.55em;height:1.55em;border-radius:50%;display:grid;place-items:center;
-    flex:none;border:2px solid currentColor;font-weight:800;font-size:.9em;background:#fff}
-  .mrow.can .mi{color:var(--ok)} .mrow.unk .mi{color:var(--claim)}
-  .mrow .mi svg{width:.9em;height:.9em}
-  .mrow .mt{font-size:.72em;line-height:1.22;min-width:0}
-  .mrow .mt b{font-weight:800;display:block}
-  .mrow.can .mt b{color:var(--ok)} .mrow.unk .mt b{color:var(--claim)}
-  .mrow .mt span{color:var(--soft);font-weight:600}
+  /* background bullets */
+  .bul{display:flex;flex-direction:column;gap:.3em;margin-bottom:.5em}
+  .bul li{display:flex;gap:.42em;align-items:flex-start;font-size:.72em;line-height:1.26;
+    list-style:none}
+  .bul li::before{content:"";width:.42em;height:.42em;border-radius:50%;background:var(--cause);
+    flex:none;margin-top:.44em}
+  .bul li span{min-width:0}
+  .bul li b{font-weight:800}
+  .bul li.now::before{background:var(--claim)}
+
+  /* the three evidence types, compact */
+  .etags{display:grid;grid-template-columns:repeat(3,1fr);gap:.26em;margin-top:auto;padding-top:.4em}
+  .et{border:2px solid;border-radius:.38em;padding:.28em .22em;text-align:center;
+    display:flex;flex-direction:column;gap:.04em}
+  .et.e1,.et.e2{border-color:var(--alert);background:#FEF6F5;color:var(--alert)}
+  .et.e3{border-color:var(--claim);background:#FEF8F1;color:var(--claim)}
+  .et b{font-family:var(--mono);font-size:.66em;font-weight:800}
+  .et span{font-size:.62em;font-weight:800;line-height:1.12;color:var(--ink)}
+
+  /* ══════ ② problem -> goal -> method ══════ */
+  .band{border:2.5px solid;border-radius:.45em;padding:.4em .5em;display:flex;gap:.45em;
+    align-items:flex-start}
+  .band .bi{width:1.6em;height:1.6em;border-radius:.34em;display:grid;place-items:center;
+    flex:none;border:2px solid currentColor;background:#fff}
+  .band .bi svg{width:.95em;height:.95em}
+  .band .bt{min-width:0}
+  .band .bl{font-size:.55em;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+    display:block;margin-bottom:.1em}
+  .band p{font-size:.75em;line-height:1.24;font-weight:700;color:var(--ink)}
+  .band p b{font-weight:800}
+
+  .band.problem{border-color:var(--alert);background:var(--alert-bg);margin-bottom:.42em}
+  .band.problem .bi,.band.problem .bl{color:var(--alert)}
+  .band.goal{border-color:var(--cause);background:var(--cause-bg);margin-bottom:.5em}
+  .band.goal .bi,.band.goal .bl{color:var(--cause)}
+
+  .mlab{font-size:.55em;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+    color:var(--faint);margin-bottom:.3em}
 
   /* ── the workflow: one page -> four runs -> one comparison ── */
   .flow{display:flex;flex-direction:column;flex:1;min-height:0}
@@ -121,50 +134,40 @@
   .fan{width:100%;height:1.35em;display:block;flex:none}
   .fan path{fill:none;stroke:var(--line-2);stroke-width:2.2;stroke-linecap:round}
 
-  .cond4{display:grid;grid-template-columns:repeat(4,1fr);gap:.3em}
-  .cd{border:2px solid var(--line-2);border-radius:.42em;padding:.36em .28em;background:#fff;
-    text-align:center;display:flex;flex-direction:column;gap:.04em;justify-content:center}
-  .cd b{font-family:var(--mono);font-size:.76em;font-weight:800;line-height:1.1}
-  .cd span{font-size:.66em;font-weight:800;line-height:1.15}
-  .cd i{font-style:normal;font-size:.6em;color:var(--faint);font-weight:700;line-height:1.1}
+  .cond4{display:grid;grid-template-columns:repeat(4,1fr);gap:.3em;flex:1;min-height:0}
+  .cd{border:2px solid var(--line-2);border-radius:.42em;padding:.4em .3em;background:#fff;
+    text-align:center;display:flex;flex-direction:column;gap:.12em;justify-content:center}
+  .cd b{font-family:var(--mono);font-size:.9em;font-weight:800;line-height:1.1}
+  .cd span{font-size:.7em;font-weight:800;line-height:1.15}
+  .cd i{font-style:normal;font-size:.62em;color:var(--faint);font-weight:700;line-height:1.1}
   .cd.k2{border-color:var(--cause);background:var(--cause-bg)}
   .cd.k2 b,.cd.k2 span{color:var(--cause)}
   .cd.k4{border-color:var(--claim);background:var(--claim-bg)}
   .cd.k4 b,.cd.k4 span{color:var(--claim)}
 
-  .keyq{margin-top:auto;border:2.5px solid var(--cause);background:var(--cause-bg);
-    border-radius:.45em;padding:.42em .55em;font-size:.74em;font-weight:700;line-height:1.28;
-    display:flex;gap:.4em;align-items:flex-start}
-  .keyq svg{width:1.05em;height:1.05em;color:var(--cause);flex:none;margin-top:.55em}
-  .keyq b{font-weight:800}
-  .keyq em{font-style:normal;display:block;font-size:.78em;letter-spacing:.11em;
-    text-transform:uppercase;color:var(--cause);font-weight:800;margin-bottom:.15em}
 
-  /* ══════ what we deliver (bottom strip) ══════ */
-  .bottom{display:grid;grid-template-columns:auto repeat(4,1fr);gap:.35em;align-items:stretch}
-  .glab{display:flex;align-items:center;font-size:.56em;font-weight:800;letter-spacing:.13em;
-    text-transform:uppercase;color:var(--ok);padding-right:.15em;max-width:5em;line-height:1.1}
-  .dl{border:2px solid var(--ok-line);border-radius:.42em;padding:.32em .45em;display:flex;
-    align-items:center;gap:.38em;background:#FCFEFC}
-  .dl .di{width:1.6em;height:1.6em;border-radius:.32em;background:var(--ok-bg);color:var(--ok);
-    display:grid;place-items:center;flex:none;border:1.5px solid var(--ok)}
-  .dl .di svg{width:.88em;height:.88em}
-  .dl .dt{font-size:.66em;line-height:1.15;min-width:0}
-  .dl .dt b{font-weight:800;display:block}
-  .dl .dt span{color:var(--soft);font-size:.92em;font-weight:600}
+
+  /* ══════ key takeaway (full width, the last thing they read) ══════ */
+  .bottom{border:3px solid var(--cause);background:var(--cause-bg);border-radius:.5em;
+    padding:.45em .6em;display:flex;align-items:center;gap:.6em}
+  .bottom .ki{width:2.1em;height:2.1em;border-radius:.4em;background:#fff;color:var(--cause);
+    border:2.5px solid var(--cause);display:grid;place-items:center;flex:none}
+  .bottom .ki svg{width:1.25em;height:1.25em}
+  .klab{font-size:.55em;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+    color:var(--cause);display:block;margin-bottom:.1em}
+  .ktxt{font-size:.86em;line-height:1.26;font-weight:700}
+  .ktxt b{font-weight:800;color:var(--cause)}
+  .ktxt .alt{color:var(--soft)}
+  .ktxt .alt b{color:var(--claim)}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="q" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a3 3 0 1 1 4 2.8c-.8.4-1.1 1-1.1 1.9M12 17.2h.01"/></symbol>
-  <symbol id="xml" viewBox="0 0 24 24"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4M13.2 5.6l-2.4 12.8"/></symbol>
   <symbol id="scale" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M12 5.5l7 1.8-3 6a3 3 0 0 0 6 0l-3-6M12 5.5L5 7.3l-3 6a3 3 0 0 0 6 0L5 7.3"/></symbol>
-  <symbol id="flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3M7 15.2h10"/></symbol>
   <symbol id="doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></symbol>
-  <symbol id="split" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.6 12h6.8M12 8.6v6.8"/></symbol>
   <symbol id="chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9.5 1.5v3.5M14.5 1.5v3.5M9.5 19v3.5M14.5 19v3.5M1.5 9.5h3.5M1.5 14.5h3.5M19 9.5h3.5M19 14.5h3.5"/></symbol>
   <symbol id="warn" viewBox="0 0 24 24"><path d="M12 3.5L21.5 20H2.5z"/><path d="M12 10v4M12 17h.01"/></symbol>
   <symbol id="bank" viewBox="0 0 24 24"><path d="M3 10h18L12 4 3 10zM5 10v8M9.7 10v8M14.3 10v8M19 10v8M3 20h18"/></symbol>
-  <symbol id="tick" viewBox="0 0 24 24"><path d="M4 12.4l5.2 5.2L20 6.6"/></symbol>
   <symbol id="bulb" viewBox="0 0 24 24"><path d="M9.5 18h5M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></symbol>
 </defs></svg>
 
@@ -174,12 +177,12 @@
     <div class="brand">
       <div class="badge"><svg><use href="#q"/></svg></div>
       <div>
-        <h1>Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection</h1>
-        <div class="tagline">SLMs cite evidence. We test whether they use it.</div>
+        <h1>Evaluating Evidence Grounding and Faithfulness in Large Language Models for Phishing Webpage Detection</h1>
+        <div class="tagline">LLMs cite evidence. We test whether they use it.</div>
       </div>
     </div>
     <div class="qtag">
-      <div class="q"><b>Model</b><span>7B security SLM</span></div>
+      <div class="q"><b>Model</b><span>7B security LLM</span></div>
       <div class="q"><b>Data</b><span>PhreshPhish</span></div>
       <div class="q"><b>Design</b><span>paired intervention</span></div>
     </div>
@@ -189,8 +192,13 @@
 
     <!-- ① -->
     <div class="card a">
-      <div class="ch"><span class="n">1</span>What we're looking at</div>
+      <div class="ch"><span class="n">1</span>Background</div>
       <div class="cb">
+        <ul class="bul">
+          <li><span>Detectors used to return <b>one bit</b> — phishing or safe.</span></li>
+          <li class="now"><span>LLMs now return a verdict <b>and quote the evidence</b>.</span></li>
+          <li class="now"><span>That quoted evidence is what an <b>analyst acts on</b>.</span></li>
+        </ul>
         <div class="browser">
           <div class="bbar">
             <div class="dots"><i></i><i></i><i></i></div>
@@ -206,27 +214,32 @@
           </div>
         </div>
         <div class="mock">mock-up for illustration &middot; not a real page</div>
-        <div class="ev">
-          <div class="evr e1"><span class="tagn">E1</span>
-            <div class="evt"><b>Wrong domain</b><span>not commbank.com.au</span></div></div>
-          <div class="evr e2"><span class="tagn">E2</span>
-            <div class="evt"><b>Takes credentials</b><span>client number + password</span></div></div>
-          <div class="evr e3"><span class="tagn">E3</span>
-            <div class="evt"><b>Borrowed brand</b><span>logo it does not own</span></div></div>
+        <div class="etags">
+          <div class="et e1"><b>E1</b><span>wrong domain</span></div>
+          <div class="et e2"><b>E2</b><span>takes credentials</span></div>
+          <div class="et e3"><b>E3</b><span>borrowed brand</span></div>
         </div>
       </div>
     </div>
 
     <!-- ② -->
     <div class="card b">
-      <div class="ch"><span class="n">2</span>What we test</div>
+      <div class="ch"><span class="n">2</span>Problem &middot; Goal &middot; Method</div>
       <div class="cb">
-        <div class="motiv">
-          <div class="mrow can"><span class="mi"><svg class="icn"><use href="#tick"/></svg></span>
-            <div class="mt"><b>Models already do this</b><span>a 7B SLM gives a verdict <em>and</em> quotes its evidence</span></div></div>
-          <div class="mrow unk"><span class="mi">?</span>
-            <div class="mt"><b>But nobody checked if it's the reason</b><span>the explanation may be written <em>after</em> the decision</span></div></div>
+        <div class="band problem">
+          <span class="bi"><svg class="icn"><use href="#warn"/></svg></span>
+          <div class="bt"><span class="bl">The problem</span>
+            <p>The verdict and the evidence are written in the <b>same breath</b>. Nothing makes the
+            quoted evidence the actual <b>cause</b> of the verdict &mdash; and nobody has checked.</p></div>
         </div>
+
+        <div class="band goal">
+          <span class="bi"><svg class="icn"><use href="#scale"/></svg></span>
+          <div class="bt"><span class="bl">Research goal</span>
+            <p>Measure whether the evidence an LLM cites <b>causally drives</b> its phishing verdict.</p></div>
+        </div>
+
+        <div class="mlab">Proposed method &mdash; four versions of one page</div>
 
         <div class="flow">
           <div class="frow">
@@ -249,15 +262,6 @@
             <div class="cd k4"><b>C4</b><span>add placebo</span><i>cited anyway?</i></div>
           </div>
 
-          <svg class="fan" viewBox="0 0 400 26" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M50 0 V15 M150 0 V15 M250 0 V15 M350 0 V15 M50 15 H350 M200 15 V26"
-              vector-effect="non-scaling-stroke"/>
-          </svg>
-
-          <div class="keyq"><svg class="icn"><use href="#bulb"/></svg>
-            <div><em>compare &Delta;P(phishing)</em>
-            <b>C2 moves, C3 doesn&rsquo;t</b> &rarr; the citation was real reasoning.<br>
-            <b>Both move</b> &rarr; it just reacts to any edit.</div></div>
         </div>
       </div>
     </div>
@@ -265,15 +269,11 @@
   </div>
 
   <div class="bottom">
-    <div class="glab">What we deliver</div>
-    <div class="dl"><div class="di"><svg class="icn"><use href="#split"/></svg></div>
-      <div class="dt"><b>Accuracy &ne; trust</b><span>right verdict, unreal evidence</span></div></div>
-    <div class="dl"><div class="di"><svg class="icn"><use href="#scale"/></svg></div>
-      <div class="dt"><b>Causal dependence</b><span>C2 vs C3, measured</span></div></div>
-    <div class="dl"><div class="di"><svg class="icn"><use href="#flask"/></svg></div>
-      <div class="dt"><b>Rationalisation rate</b><span>placebos cited as reasons</span></div></div>
-    <div class="dl"><div class="di"><svg class="icn"><use href="#xml"/></svg></div>
-      <div class="dt"><b>Reusable benchmark</b><span>XML protocol + paired data</span></div></div>
+    <span class="ki"><svg class="icn"><use href="#bulb"/></svg></span>
+    <div><span class="klab">Key takeaway &mdash; compare &Delta;P(phishing)</span>
+      <div class="ktxt"><b>C2 moves and C3 does not</b> &rarr; the model really used the evidence it
+      cited. <span class="alt"><b>Both move</b> &rarr; it is only reacting to the edit, and the
+      citation explained nothing.</span></div></div>
   </div>
 
 </div>

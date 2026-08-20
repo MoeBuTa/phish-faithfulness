@@ -30,7 +30,7 @@ Starting points: `phishfaith/download.py`, `phishfaith/preprocess.py`,
 Deliverables: `data_manifest.csv` · `preprocessing.py` · `citation_view.py` ·
 `dedup_report.md` · `dataset_report.md`
 
-## Student 2 — SLM and XML pipeline
+## Student 2 — LLM and XML pipeline
 
 The model is already deployed and served behind an OpenAI-compatible endpoint,
 so this role starts at **configuration, not deployment**: point the client at the
@@ -116,7 +116,7 @@ not yet a result.
 | **W4** | citations | Full XML prompt. Evaluate grounding, semantic support, unsupported claims, reasoning↔verdict consistency. Freeze the eligible set. |
 | **W5** | intervene | C1 · C2 · C3 on eligible pages. Analyse paired changes. |
 | **W6** | placebo | C1 + cookie placebo + copyright placebo. Adoption rate, verdict flips, explanation changes. |
-| **W7** | extend | Human annotation, inter-annotator agreement, correct-answer/wrong-evidence analysis. If time: evidence competition, necessity/sufficiency, a second SLM. |
+| **W7** | extend | Human annotation, inter-annotator agreement, correct-answer/wrong-evidence analysis. If time: evidence competition, necessity/sufficiency, a second LLM. |
 | **W8** | write | Statistics, tables, figures, failure examples, limitations, report, paper draft, presentation. |
 
 Weeks 1 and 2 carry hard milestones. If they are not met the plan changes,
@@ -132,7 +132,7 @@ Add these only once the core has landed. Each is self-contained.
   suspicious placebo at once; study which one it chooses to cite.
 - **C — explanation burden.** Compare accuracy across V1/V2/V3: does asking for
   more reasoning make it worse at security?
-- **D — cross-SLM.** One or two more 7B/8B models — not a leaderboard, but
-  whether grounding failures are model-specific or common to SLMs.
+- **D — cross-LLM.** One or two more 7B/8B models — not a leaderboard, but
+  whether grounding failures are model-specific or common to LLMs.
 - **E — right answer, wrong evidence.** Quantify how far accuracy overestimates
   trustworthy reasoning.
