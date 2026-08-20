@@ -14,19 +14,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from phishfaith import citation_view, grounding, interventions, parse, prompts  # noqa: E402
 
-URL = "http://northbank-secure-login.rr7.tk/verify"
+URL = "http://commbank-netbank-secure.rr7.tk/logon"
 HTML = """
-<html><head><title>NorthBank - Sign in</title></head>
+<html><head><title>CommBank NetBank - Log on</title></head>
 <body>
-  <img src="/img/nb-logo.png" alt="NorthBank">
-  <h1>NorthBank</h1>
+  <img src="/img/cb-logo.png" alt="CommBank">
+  <h1>CommBank</h1>
   <p>Please confirm your identity to restore access</p>
   <form action="http://rr7.tk/collect.php" method="post">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="pin" placeholder="PIN">
-    <button>Sign in</button>
+    <input type="text" name="clientnumber" placeholder="client number">
+    <input type="password" name="password" placeholder="password">
+    <button>Log on</button>
   </form>
-  <p>&copy; 2019 NorthBank Ltd.</p>
+  <p>&copy; 2019 Commonwealth Bank of Australia</p>
 </body></html>
 """
 
@@ -37,8 +37,8 @@ STUB_RESPONSE = """<result>
     <item source_id="U1" exact_quote="rr7.tk"/>
     <item source_id="H7" exact_quote="type=&quot;password&quot;"/>
   </evidence>
-  <explanation>The page shows NorthBank branding but is served from rr7.tk, which
-  is not a NorthBank domain, and it collects a PIN.</explanation>
+  <explanation>The page shows CommBank branding but is served from rr7.tk, which
+  is not a CommBank domain, and it collects a client number and password.</explanation>
 </result>"""
 
 

@@ -1,9 +1,11 @@
-# Do SLMs rely on the phishing evidence they cite?
+# Evidence or Rationalisation
+
+**SLMs cite evidence. We test whether they use it.**
 
 A 7B security model can label a webpage *phishing* and quote the exact HTML that
-proves it. This project asks the harder question: **when we change that quoted
-evidence, does the decision change with it — or was the citation a story told
-afterwards?**
+proves it. This project takes the harder step: **we change that quoted evidence
+and see whether the decision changes with it.** If it does not, the citation was
+a story told afterwards.
 
 If the claim and the cause come apart, accuracy overstates trustworthiness. The
 model is right for reasons it cannot correctly report. That gap is the project.

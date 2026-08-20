@@ -140,9 +140,13 @@ def build_c2(view: CitationView, cited_id: str) -> tuple[CitationView, Intervent
 def pick_matched_uncited(view: CitationView, cited_ids: set[str], target_id: str) -> str | None:
     """Choose the uncited element most comparable to `target_id`.
 
-    Preference order: same kind and same tag, then same kind, then same tag.
+    Preference order: same tag and same kind, then same tag, then same kind.
     Ties break on closest rendered length, so C3's edit lands on an element of
     roughly the same size as C2's.
+
+    Tag outranks kind because the *operator* is selected by tag. A candidate of
+    the same evidence kind but a different tag cannot take C2's operator, and a
+    control edited by a different operator is not a control.
     """
     target = view.sources[target_id]
     candidates = [s for sid, s in view.sources.items() if sid not in cited_ids and sid != target_id]
@@ -150,11 +154,11 @@ def pick_matched_uncited(view: CitationView, cited_ids: set[str], target_id: str
         return None
 
     def rank(s: Source) -> tuple[int, int]:
-        if s.kind == target.kind and s.tag == target.tag:
+        if s.tag == target.tag and s.kind == target.kind:
             tier = 0
-        elif s.kind == target.kind:
-            tier = 1
         elif s.tag == target.tag:
+            tier = 1
+        elif s.kind == target.kind:
             tier = 2
         else:
             tier = 3

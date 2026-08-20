@@ -81,9 +81,19 @@ def _kind_of(tag: str, attrs: dict[str, str]) -> str:
     return "text"
 
 
+# Deliberately includes the identifiers Australian and UK banks actually use --
+# "client number" (CommBank), "customer number", "member number" -- because a
+# generic user/email/login list silently misclassifies those as ordinary text,
+# and then C3 picks a control of the wrong type.
+_CREDENTIAL_WORDS = (
+    "user", "login", "logon", "email", "account", "pin", "card", "ssn",
+    "client", "customer", "member", "passw", "credential",
+)
+
+
 def _looks_credential(attrs: dict[str, str]) -> bool:
     blob = " ".join(attrs.get(k, "") for k in ("name", "id", "placeholder")).lower()
-    return any(w in blob for w in ("user", "login", "email", "account", "pin", "card", "ssn"))
+    return any(w in blob for w in _CREDENTIAL_WORDS)
 
 
 def _render(tag: str, attrs: dict[str, str], text: str) -> str:

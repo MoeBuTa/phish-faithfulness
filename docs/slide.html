@@ -1,4 +1,4 @@
-<title>Phishing SLM Faithfulness — Overview Slide</title>
+<title>Evidence or Rationalisation</title>
 <style>
   /* Single-theme by design: a projected slide commits to a light ground. */
   :root{
@@ -75,7 +75,9 @@
     padding:.22em;text-align:center;font-size:.66em;font-weight:800}
   .bfoot{font-size:.56em;color:var(--faint);font-family:var(--mono);font-weight:700}
 
-  .ev{display:flex;flex-direction:column;gap:.28em;margin-top:.45em}
+  .mock{font-size:.5em;color:var(--faint);font-weight:700;text-align:center;
+    letter-spacing:.06em;text-transform:uppercase;margin-top:.28em}
+  .ev{display:flex;flex-direction:column;gap:.28em;margin-top:.35em}
   .evr{display:flex;gap:.38em;align-items:center;border:2px solid;border-radius:.4em;
     padding:.3em .4em;background:#fff;flex:1}
   .evr.e1,.evr.e2{border-color:var(--alert);background:#FEF6F5}
@@ -173,7 +175,7 @@
       <div class="badge"><svg><use href="#q"/></svg></div>
       <div>
         <div class="eyebrow">Trustworthy Security Reasoning in Small Language Models</div>
-        <h1>Do SLMs rely on the phishing evidence they cite?</h1>
+        <h1>SLMs cite evidence. We test whether they use it.</h1>
       </div>
     </div>
     <div class="qtag">
@@ -193,21 +195,22 @@
           <div class="bbar">
             <div class="dots"><i></i><i></i><i></i></div>
             <div class="urlpill"><svg class="icn"><use href="#warn"/></svg>
-              <span>northbank-secure-login.rr7.tk</span></div>
+              <span>commbank-netbank-secure.rr7.tk</span></div>
           </div>
           <div class="bpage">
-            <div class="blogo"><span class="m"><svg class="icn"><use href="#bank"/></svg></span>NorthBank</div>
-            <div class="bfield">username</div>
-            <div class="bfield pw">•••••••• &nbsp;PIN</div>
-            <div class="bbtn">Sign in</div>
-            <div class="bfoot">© 2019 NorthBank Ltd.</div>
+            <div class="blogo"><span class="m"><svg class="icn"><use href="#bank"/></svg></span>CommBank</div>
+            <div class="bfield">client number</div>
+            <div class="bfield pw">•••••••• &nbsp;password</div>
+            <div class="bbtn">Log on</div>
+            <div class="bfoot">© 2019 Commonwealth Bank</div>
           </div>
         </div>
+        <div class="mock">mock-up for illustration &middot; not a real page</div>
         <div class="ev">
           <div class="evr e1"><span class="tagn">E1</span>
-            <div class="evt"><b>Wrong domain</b><span>NorthBank, served from rr7.tk</span></div></div>
+            <div class="evt"><b>Wrong domain</b><span>not commbank.com.au</span></div></div>
           <div class="evr e2"><span class="tagn">E2</span>
-            <div class="evt"><b>Takes credentials</b><span>password / PIN field</span></div></div>
+            <div class="evt"><b>Takes credentials</b><span>client number + password</span></div></div>
           <div class="evr e3"><span class="tagn">E3</span>
             <div class="evt"><b>Borrowed brand</b><span>logo it does not own</span></div></div>
         </div>

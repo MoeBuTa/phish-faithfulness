@@ -1,6 +1,7 @@
 # Project specification
 
-**Do small language models rely on the phishing evidence they cite?**
+**Evidence or Rationalisation** — evaluating evidence grounding and
+faithfulness in small language models for phishing webpage detection.
 
 Honours / capstone project · 8 weeks · 5 students.
 This file is the authority. Where the slide, the proposal page and this document
@@ -32,8 +33,8 @@ A phishing page impersonates an organisation it does not belong to in order to
 take something from whoever visits. Three properties make it phishing, and the
 same three are what a detector must cite:
 
-- **E1 — domain–brand mismatch.** The page presents as NorthBank but is served
-  from `rr7.tk`. The strongest signal, and the one nearly every published
+- **E1 — domain–brand mismatch.** The page presents as CommBank but is served
+  from `rr7.tk`, not `commbank.com.au`. The strongest signal, and the one nearly every published
   detector keys on.
 - **E2 — credential harvesting.** It asks for a password or PIN and posts it
   somewhere the real organisation does not control.
@@ -57,12 +58,12 @@ Every page is rewritten into a **citation view**: a numbered list where `U1` is
 the URL and `H1 … Hn` are page elements, each rendered as one line.
 
 ```
-[U1] http://northbank-secure-login.rr7.tk/verify
-[H1] <title>NorthBank — Sign in</title>
-[H2] <img src="/img/nb-logo.png" alt="NorthBank">
+[U1] http://commbank-netbank-secure.rr7.tk/logon
+[H1] <title>CommBank NetBank — Log on</title>
+[H2] <img src="/img/cb-logo.png" alt="CommBank">
 [H5] <form action="http://rr7.tk/collect.php" method="post">
 [H7] <input type="password" name="pin" placeholder="PIN">
-[H9] <p>© 2019 NorthBank Ltd.</p>
+[H9] <p>© 2019 Commonwealth Bank of Australia</p>
 ```
 
 The model must answer in a fixed XML schema naming a `source_id` and an
@@ -295,7 +296,10 @@ any arm that needs screenshots.
 
 - **Preferred** — Evaluating Evidence Grounding and Faithfulness in Small
   Language Models for Phishing Webpage Detection
-- **Alternative** — Evidence or Rationalisation? Evaluating Security Reasoning
+- **Alternative** — Evidence or Rationalisation: Evaluating Security Reasoning
   in Small Language Models for Phishing Detection
-- **Paper-style** — Do Small Language Models Rely on the Phishing Evidence They
-  Cite?
+- **Short name**, used across the repo and the slide — Evidence or
+  Rationalisation
+
+No interrogative titles. The one-line version for a slide or a talk is
+declarative: *SLMs cite evidence. We test whether they use it.*

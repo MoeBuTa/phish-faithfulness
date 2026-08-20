@@ -1,4 +1,4 @@
-<title>Do SLMs Rely on the Phishing Evidence They Cite?</title>
+<title>Cited Evidence Interventions</title>
 <style>
   /* Deliberately single-theme: a comic-paper look depends on the light ground,
      so the palette commits to it rather than inverting badly in dark mode. */
@@ -533,10 +533,10 @@
 <!-- ══════════ HERO ══════════ -->
 <header>
   <div class="kicker"><svg class="icn"><use href="#q"/></svg>Honours / Capstone Project · 8 weeks · 5 students</div>
-  <h1>Do SLMs rely on the phishing evidence they cite?</h1>
+  <h1>SLMs cite evidence. We test whether they use it.</h1>
   <p class="lede">A 7B security model can label a webpage <em>phishing</em> and quote the exact HTML
-  that proves it. This project asks the harder question — when we <b>change that quoted evidence</b>,
-  does the model's decision change with it? Or was the citation just a story told afterwards?</p>
+  that proves it. This project takes the harder step — we <b>change that quoted evidence</b> and see
+  whether the decision changes with it. If it does not, the citation was a story told afterwards.</p>
 
   <div class="duo">
     <div class="side a tilt-l">
@@ -571,33 +571,34 @@
         <div class="bbar">
           <div class="dots"><i></i><i></i><i></i></div>
           <div class="urlpill"><svg class="icn"><use href="#warn"/></svg>
-            <span>http://northbank-secure-login.rr7.tk/verify</span></div>
+            <span>http://commbank-netbank-secure.rr7.tk/logon</span></div>
         </div>
         <div class="bpage">
-          <div class="blogo"><span class="m"><svg class="icn"><use href="#bank"/></svg></span>NorthBank</div>
+          <div class="blogo"><span class="m"><svg class="icn"><use href="#bank"/></svg></span>CommBank</div>
           <p class="btag">Please confirm your identity to restore access</p>
-          <div class="bfield">username</div>
-          <div class="bfield pw">•••••••••••&nbsp; PIN</div>
-          <div class="bbtn">Sign in</div>
-          <div class="bfoot">© 2019 NorthBank Ltd.</div>
+          <div class="bfield">client number</div>
+          <div class="bfield pw">•••••••••••&nbsp; password</div>
+          <div class="bbtn">Log on</div>
+          <div class="bfoot">© 2019 Commonwealth Bank of Australia</div>
         </div>
       </div>
-      <p class="anat-cap">A fictional example — no real brand is impersonated here. This same page is
-      used as the running example throughout this document.</p>
+      <p class="anat-cap">A mock-up, not a real page. It names a real bank because real phishing
+      impersonates real banks — no CommBank branding is reproduced. This same page is the running
+      example throughout this document, including the four conditions below.</p>
     </div>
 
     <div class="anat-ev">
       <div class="evrow e1">
         <div class="evn">E1</div>
         <div class="evb"><h3>Domain–brand mismatch</h3>
-          <p>The page presents itself as NorthBank, but is served from <span class="mono">rr7.tk</span>
-          — a domain NorthBank does not own. This is the single strongest signal, and it is the one
-          nearly every published detector keys on.</p></div>
+          <p>The page presents itself as CommBank, but is served from <span class="mono">rr7.tk</span>
+          — not <span class="mono">commbank.com.au</span>. This is the single strongest signal, and it
+          is the one nearly every published detector keys on.</p></div>
       </div>
       <div class="evrow e2">
         <div class="evn">E2</div>
         <div class="evb"><h3>Credential harvesting</h3>
-          <p>The page asks for a password or PIN and posts it somewhere the real bank does not control.
+          <p>The page asks for a client number and password and posts them somewhere the real bank does not control.
           Without this, an impersonating page is often just a copy — with it, it is an attack.</p></div>
       </div>
       <div class="evrow e3">
@@ -692,12 +693,12 @@
     <div class="we-card in">
       <div class="we-hd"><svg class="icn"><use href="#doc"/></svg>1 · What the model is shown</div>
 <pre><span class="c">// citation view — every element gets a stable handle</span>
-<span class="id">[URL]</span> http://northbank-secure-login.rr7.tk/verify
-<span class="id">[H1]</span>  &lt;title&gt;NorthBank — Sign in&lt;/title&gt;
-<span class="id">[H2]</span>  &lt;img src="/img/nb-logo.png" alt="NorthBank"&gt;
+<span class="id">[URL]</span> http://commbank-netbank-secure.rr7.tk/logon
+<span class="id">[H1]</span>  &lt;title&gt;CommBank NetBank — Log on&lt;/title&gt;
+<span class="id">[H2]</span>  &lt;img src="/img/cb-logo.png" alt="CommBank"&gt;
 <span class="id">[H3]</span>  &lt;form action="http://rr7.tk/collect.php"&gt;
-<span class="id">[H4]</span>  &lt;input type="password" name="pin"&gt;
-<span class="id">[H5]</span>  &lt;p&gt;© 2019 NorthBank Ltd.&lt;/p&gt;</pre>
+<span class="id">[H4]</span>  &lt;input type="password" name="password"&gt;
+<span class="id">[H5]</span>  &lt;p&gt;© 2019 Commonwealth Bank&lt;/p&gt;</pre>
       <div class="we-note"><b>Why the IDs matter:</b> without them the model can only wave at
       "the login form". With them it must point at <span class="mono">H4</span> — and we can check.</div>
     </div>
@@ -712,9 +713,9 @@
     &lt;<span class="k">item</span> source_id=<span class="s">"H4"</span>
           exact_quote=<span class="s">"<span class="hi">type=&amp;quot;password&amp;quot;</span>"</span>/&gt;
   &lt;/<span class="k">evidence</span>&gt;
-  &lt;<span class="k">explanation</span>&gt;The page shows NorthBank branding
+  &lt;<span class="k">explanation</span>&gt;The page shows CommBank branding
   but is served from rr7.tk, which is not a
-  NorthBank domain, and it collects a PIN.&lt;/<span class="k">explanation</span>&gt;
+  CommBank domain, and it takes a password.&lt;/<span class="k">explanation</span>&gt;
 &lt;/<span class="k">result</span>&gt;</pre>
       <div class="we-note"><b>Note what it did <em>not</em> cite:</b> <span class="mono">H5</span>,
       the stale 2019 copyright. That makes H5 available as a matched control.</div>
@@ -874,11 +875,11 @@ fact that is not visible above.</pre>
         wobbles on its own — the noise floor.</p>
       </div>
 <pre class="cdet-code"><span class="c">// the page</span>
-<span class="id">[U1]</span> https://paypal-login-security.xyz
-<span class="id">[H1]</span> &lt;title&gt;PayPal Login&lt;/title&gt;
-<span class="id">[H2]</span> &lt;input type="email"&gt;
+<span class="id">[U1]</span> https://commbank-netbank-secure.rr7.tk
+<span class="id">[H1]</span> &lt;title&gt;CommBank NetBank Log on&lt;/title&gt;
+<span class="id">[H2]</span> &lt;input type="text" name="clientnumber"&gt;
 <span class="id">[H3]</span> &lt;input type="password"&gt;
-<span class="id">[H4]</span> &lt;button&gt;Sign In&lt;/button&gt;
+<span class="id">[H4]</span> &lt;button&gt;Log on&lt;/button&gt;
 
 <span class="c">// what the model returns</span>
 &lt;<span class="k">verdict</span>&gt;phishing&lt;/<span class="k">verdict</span>&gt;
@@ -893,9 +894,9 @@ fact that is not visible above.</pre>
   &lt;/<span class="k">item</span>&gt;
   &lt;<span class="k">item</span>&gt;
     &lt;<span class="k">source_id</span>&gt;<span class="hi">U1</span>&lt;/<span class="k">source_id</span>&gt;
-    &lt;<span class="k">exact_quote</span>&gt;paypal-login-security.xyz&lt;/<span class="k">exact_quote</span>&gt;
+    &lt;<span class="k">exact_quote</span>&gt;commbank-netbank-secure.rr7.tk&lt;/<span class="k">exact_quote</span>&gt;
     &lt;<span class="k">claim</span>&gt;The domain is inconsistent with the
-      claimed PayPal identity.&lt;/<span class="k">claim</span>&gt;
+      claimed CommBank identity.&lt;/<span class="k">claim</span>&gt;
   &lt;/<span class="k">item</span>&gt;
 &lt;/<span class="k">evidence</span>&gt;</pre>
     </div>
@@ -932,8 +933,15 @@ fact that is not visible above.</pre>
       <div class="cdet-txt">
         <p>Also an edit — but to an element the model did <b>not</b> cite, chosen to be as similar as
         possible to the one it did. The model cited <span class="mono">H3</span> (password field) but
-        not <span class="mono">H4</span> (<span class="mono">&lt;button&gt;Sign In&lt;/button&gt;</span>),
-        so C3 edits <span class="mono">H4</span> and leaves <span class="mono">H3</span> alone.</p>
+        not <span class="mono">H2</span> (the client-number field), so C3 edits
+        <span class="mono">H2</span> and leaves <span class="mono">H3</span> alone.</p>
+        <p><b>Same tag, same operator.</b> The control has to be another
+        <span class="mono">&lt;input&gt;</span>, not the <span class="mono">&lt;button&gt;</span> at
+        <span class="mono">H4</span> — a button cannot take the edit we applied to a password field,
+        and a control edited by a <em>different</em> operator is not a control. When no same-tag
+        candidate exists, the pair is still built but flagged
+        <span class="mono">operator_matched=false</span>, and that flag has to reach the results
+        table.</p>
         <p><b>Why this is not optional.</b> If C2 changes the verdict, we cannot immediately conclude
         the citation mattered. It could just be that the model is jumpy about <em>any</em> HTML edit.
         Only the comparison separates those two explanations.</p>
@@ -1101,7 +1109,7 @@ fact that is not visible above.</pre>
         <div class="kind"><b>Label-preserving intervention</b><span>the true phishing/benign label provably does not change</span></div>
         <div class="kind"><b>Decision-evidence intervention</b><span>tests evidence sensitivity, but we cannot claim the true label held</span></div>
       </div>
-      <p style="margin-top:12px">Example: rewriting <span class="mono">paypal-login.xyz</span> →
+      <p style="margin-top:12px">Example: rewriting <span class="mono">commbank-login.xyz</span> →
       <span class="mono">neutral-domain.example</span> is a perfectly good sensitivity probe, but it is
       <em>not</em> safe to assert the real label is unchanged. Report it as the second kind.</p>
     </div>
@@ -1434,9 +1442,9 @@ fact that is not visible above.</pre>
     <div class="trow pref"><span class="k">Preferred</span>
       <span class="tt">Evaluating Evidence Grounding and Faithfulness in Small Language Models for Phishing Webpage Detection</span></div>
     <div class="trow"><span class="k">Alternative</span>
-      <span class="tt">Evidence or Rationalisation? Evaluating Security Reasoning in Small Language Models for Phishing Detection</span></div>
-    <div class="trow"><span class="k">Paper-style</span>
-      <span class="tt">Do Small Language Models Rely on the Phishing Evidence They Cite?</span></div>
+      <span class="tt">Evidence or Rationalisation: Evaluating Security Reasoning in Small Language Models for Phishing Detection</span></div>
+    <div class="trow"><span class="k">Short name</span>
+      <span class="tt">Evidence or Rationalisation</span></div>
   </div>
 </section>
 
